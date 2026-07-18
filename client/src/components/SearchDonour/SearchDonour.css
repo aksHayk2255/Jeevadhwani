@@ -1,0 +1,172 @@
+.donor-card {
+  background: var(--surface);
+  border: 1px solid rgba(17, 17, 17, 0.06);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  padding: 28px;
+  animation: rise-in 0.7s ease both;
+}
+
+.donor-card-label {
+  color: var(--ink-faint);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.blood-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.blood-btn {
+  padding: 14px 0;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.blood-btn:hover {
+  border-color: var(--red-muted);
+  transform: translateY(-1px);
+}
+
+.blood-btn.selected {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(225, 29, 46, 0.25);
+}
+
+.donor-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 6px;
+}
+
+.donor-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+}
+
+.donor-name {
+  font-weight: 800;
+  font-size: 0.98rem;
+  letter-spacing: -0.02em;
+}
+
+.donor-meta {
+  color: var(--ink-faint);
+  font-size: 0.82rem;
+  margin-top: 2px;
+}
+
+.donor-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.blood-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: var(--red-soft);
+  color: var(--red);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.request-btn {
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--red);
+  color: var(--red);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.request-btn:hover:not(:disabled) {
+  background: var(--red);
+  color: #fff;
+}
+
+.request-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.donor-error {
+  color: var(--red);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.request-status {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.request-status.ok {
+  color: var(--green);
+}
+
+.request-status.err {
+  color: var(--red);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 520px) {
+  .donor-card {
+    padding: 20px;
+  }
+
+  .donor-result {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .donor-actions {
+    justify-content: space-between;
+  }
+}

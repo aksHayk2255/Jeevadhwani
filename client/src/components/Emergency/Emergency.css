@@ -1,0 +1,261 @@
+.emergency {
+  padding: 28px 0 80px;
+}
+
+.emergency-panel {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 40px;
+  align-items: center;
+  background: var(--emergency);
+  border-radius: 28px;
+  padding: 48px 52px;
+  overflow: hidden;
+  position: relative;
+}
+
+.emergency-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 82% 45%, rgba(225, 29, 46, 0.16), transparent 34%),
+    radial-gradient(circle at 18% 80%, rgba(255, 255, 255, 0.03), transparent 28%);
+  pointer-events: none;
+}
+
+.emergency-copy,
+.radar-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.emergency-eyebrow {
+  color: #f0717a;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.emergency-title {
+  color: #fff;
+  font-size: clamp(1.8rem, 3.2vw, 2.55rem);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  font-weight: 800;
+  max-width: 420px;
+  margin-bottom: 16px;
+}
+
+.emergency-text {
+  color: #b0aaaa;
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 420px;
+  margin-bottom: 28px;
+}
+
+.emergency-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.broadcast-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--emergency-muted);
+  color: #ddd;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.broadcast-chip strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: var(--red);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.broadcast-btn {
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--red);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.broadcast-btn:hover:not(:disabled) {
+  background: var(--red-deep);
+  transform: translateY(-1px);
+}
+
+.broadcast-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.broadcast-feedback {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.broadcast-feedback.ok {
+  color: #86efac;
+}
+
+.broadcast-feedback.err {
+  color: #fda4af;
+}
+
+.radar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.radar {
+  position: relative;
+  width: min(320px, 100%);
+  aspect-ratio: 1;
+}
+
+.radar-ring {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+}
+
+.ring-1 {
+  width: 34%;
+  height: 34%;
+}
+
+.ring-2 {
+  width: 62%;
+  height: 62%;
+}
+
+.ring-3 {
+  width: 90%;
+  height: 90%;
+}
+
+.radar-sweep {
+  position: absolute;
+  inset: 5%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(225, 29, 46, 0.18) 50deg,
+    transparent 70deg
+  );
+  animation: sweep 4.5s linear infinite;
+}
+
+.radar-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--red);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.9rem;
+  box-shadow: 0 0 0 12px rgba(225, 29, 46, 0.18),
+    0 0 0 28px rgba(225, 29, 46, 0.08);
+  z-index: 2;
+}
+
+.radar-dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  translate: -50% -50%;
+  background: #9ca3af;
+}
+
+.radar-dot.waiting {
+  background: var(--amber);
+}
+
+.radar-dot.received {
+  background: var(--green);
+}
+
+.radar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  color: #9a9494;
+  font-size: 0.82rem;
+}
+
+.radar-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-dot.idle {
+  background: #9ca3af;
+}
+
+.legend-dot.waiting {
+  background: var(--amber);
+}
+
+.legend-dot.received {
+  background: var(--green);
+}
+
+@keyframes sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 960px) {
+  .emergency-panel {
+    grid-template-columns: 1fr;
+    padding: 36px 28px;
+    gap: 32px;
+  }
+
+  .emergency-title,
+  .emergency-text {
+    max-width: none;
+  }
+}
