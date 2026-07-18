@@ -63,11 +63,7 @@ function Navbar() {
                 >
                   {t("imDonor")}
                 </Link>
-                <Link
-                  to="/register"
-                  className={`role ${role === "hospital" ? "active" : ""}`}
-                  state={{ role: "hospital" }}
-                >
+                <Link to="/hospital-login" className="role">
                   {t("imHospital")}
                 </Link>
               </div>

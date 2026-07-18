@@ -143,3 +143,87 @@
   color: var(--red);
   font-weight: 700;
 }
+
+.hospital-dashboard-shell {
+  width: min(760px, 100%);
+}
+
+.hospital-dashboard-card {
+  display: grid;
+  gap: 16px;
+}
+
+.profile-card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 20px;
+  background: #fff8f8;
+  display: grid;
+  gap: 16px;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-pill {
+  background: #eafff2;
+  color: #0f766e;
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.status-pill.quarantined {
+  background: #fff4e5;
+  color: #b45309;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.field-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 4px;
+}
+
+.field-value {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.auth-form textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 500;
+  color: var(--ink);
+  background: #fff;
+  outline: none;
+  resize: vertical;
+}
+
+.auth-form textarea:focus {
+  border-color: var(--red-muted);
+  box-shadow: 0 0 0 4px rgba(225, 29, 46, 0.1);
+}
+
+@media (max-width: 640px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}

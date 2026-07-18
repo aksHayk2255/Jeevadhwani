@@ -9,14 +9,13 @@ function Register() {
   const navigate = useNavigate();
   const location = useLocation();
   const { register } = useAuth();
-  const initialRole = location.state?.role === "hospital" ? "hospital" : "donor";
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
-    role: initialRole,
+    role: "donor",
     bloodType: "O+",
-    hospitalName: "",
+    weight: "",
     phone: "",
     aadhaarNumber: "",
   });
@@ -24,10 +23,15 @@ function Register() {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (location.state?.role === "hospital" || location.state?.role === "donor") {
-      setForm((prev) => ({ ...prev, role: location.state.role }));
+    if (location.state?.role === "hospital") {
+      navigate("/login", { replace: true });
+      return;
     }
-  }, [location.state]);
+
+    if (location.state?.role === "donor") {
+      setForm((prev) => ({ ...prev, role: "donor" }));
+    }
+  }, [location.state, navigate]);
 
   function updateField(event) {
     const { name, value, type, checked } = event.target;
@@ -53,21 +57,25 @@ function Register() {
         throw new Error("Please enter a mobile number");
       }
 
+      const parsedWeight = Number(form.weight);
+      if (!Number.isFinite(parsedWeight) || parsedWeight <= 0) {
+        throw new Error("Please enter a valid weight");
+      }
+
+      if (parsedWeight < 50) {
+        throw new Error("Ineligible for blood donation. Weight must be at least 50 kg.");
+      }
+
       const payload = {
         name: form.name,
         email: form.email,
         password: form.password,
-        role: form.role,
+        role: "donor",
         phone: form.phone,
+        bloodType: form.bloodType,
+        weight: parsedWeight,
+        aadhaarNumber: normalizedAadhaar,
       };
-
-      if (form.role === "donor") {
-        payload.bloodType = form.bloodType;
-      } else {
-        payload.hospitalName = form.hospitalName;
-      }
-
-      payload.aadhaarNumber = normalizedAadhaar;
 
       await register(payload);
       navigate("/");
@@ -90,27 +98,12 @@ function Register() {
           <p className="auth-eyebrow">Join the network</p>
           <h1>Create your account</h1>
           <p className="auth-subtitle">
-            Register as a donor or hospital to start matching blood in seconds.
+            Register as a donor to start matching blood in seconds.
           </p>
 
           <form className="auth-form" onSubmit={handleSubmit}>
-            <div className="role-toggle auth-role" role="group" aria-label="Select role">
-              <button
-                type="button"
-                className={`role ${form.role === "donor" ? "active" : ""}`}
-                onClick={() => setForm((prev) => ({ ...prev, role: "donor" }))}
-              >
-                I&apos;m a donor
-              </button>
-              <button
-                type="button"
-                className={`role ${form.role === "hospital" ? "active" : ""}`}
-                onClick={() =>
-                  setForm((prev) => ({ ...prev, role: "hospital" }))
-                }
-              >
-                I&apos;m a hospital
-              </button>
+            <div className="auth-help" style={{ marginBottom: "0.75rem" }}>
+              You can create a donor account here.
             </div>
 
             <label>
@@ -153,35 +146,34 @@ function Register() {
               />
             </label>
 
-            {form.role === "donor" ? (
-              <label>
-                Blood type
-                <select
-                  name="bloodType"
-                  value={form.bloodType}
-                  onChange={updateField}
-                  required
-                >
-                  {BLOOD_TYPES.map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            ) : (
-              <label>
-                Hospital name
-                <input
-                  type="text"
-                  name="hospitalName"
-                  value={form.hospitalName}
-                  onChange={updateField}
-                  placeholder="City General Hospital"
-                  required
-                />
-              </label>
-            )}
+            <label>
+              Blood type
+              <select
+                name="bloodType"
+                value={form.bloodType}
+                onChange={updateField}
+                required
+              >
+                {BLOOD_TYPES.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Weight (kg)
+              <input
+                type="number"
+                name="weight"
+                value={form.weight}
+                onChange={updateField}
+                placeholder="50"
+                min="1"
+                required
+              />
+            </label>
 
             <label>
               Mobile number
