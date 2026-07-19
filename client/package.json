@@ -2,6 +2,7 @@
   "name": "lifelink-client",
   "private": true,
   "version": "1.0.0",
+  "homepage": "https://aksHayk2255.github.io/Jeevadhwani",
   "type": "module",
   "scripts": {
     "dev": "vite",
