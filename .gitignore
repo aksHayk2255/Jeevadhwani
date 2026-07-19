@@ -3,16 +3,18 @@ node_modules/
 client/node_modules/
 server/node_modules/
 
-# Build files
+# Build output
 client/dist/
+dist/
 
-# Logs
-*.log
-
-# Environment variables
+# Environment
 .env
 .env.*
 
-# OS files
+# Logs
+*.log
+npm-debug.log*
+
+# OS
 .DS_Store
 Thumbs.db
