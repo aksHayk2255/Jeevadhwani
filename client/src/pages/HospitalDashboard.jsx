@@ -211,15 +211,15 @@ function HospitalDashboard() {
 
               <div className="profile-grid">
                 <div>
-                  <p className="field-label">Masked name</p>
+                  <p className="field-label"> Name</p>
                   <p className="field-value">{maskText(donor.name)}</p>
                 </div>
                 <div>
-                  <p className="field-label">Masked email</p>
+                  <p className="field-label"> Email</p>
                   <p className="field-value">{maskText(donor.email)}</p>
                 </div>
                 <div>
-                  <p className="field-label">Masked phone</p>
+                  <p className="field-label"> Phone</p>
                   <p className="field-value">{maskPhone(donor.phone)}</p>
                 </div>
                 <div>
